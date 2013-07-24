@@ -13,6 +13,10 @@ public class Paddles implements Runnable {
     
     Rectangle paddle;
     
+    //Ball Objects
+    static Ball b = new Ball(193, 143);
+    Thread ball = new Thread(b);
+    
     public Paddles(int x, int y, int id){
         this.x = x;
         this.y = y;
@@ -63,7 +67,7 @@ public class Paddles implements Runnable {
     }
     //Draw Paddle
     public void draw(Graphics g){
-        g.setColor(Color.PINK);
+        g.setColor(Color.BLACK);
         g.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
     }
 
