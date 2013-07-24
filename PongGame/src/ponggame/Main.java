@@ -4,9 +4,9 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
-import sun.audio.*;
 
 public class Main extends JFrame {
+    
     
     //Double buffering
     Image dbImage;
@@ -18,7 +18,7 @@ public class Main extends JFrame {
     boolean gameOver;
     
     //Background
-    Image bg;
+    Image bg, bg2;
     
     //Variables for screen size
     int
@@ -41,21 +41,20 @@ public class Main extends JFrame {
         this.addKeyListener(new AL());
         //Background Image
         ImageIcon i = new ImageIcon("C:/Users/School/Documents/NetBeansProjects/PongGame/src/ponggame/Tennis.gif/");
+        ImageIcon j = new ImageIcon("F:/Tennis.gif");
         bg = i.getImage();
-        
+        bg2 = j.getImage();
     }
     
-    public static void main(String[] args){
+    public static void main(String[] args) throws InterruptedException{
     
         
         //Create and start threads
-        Thread ball = new Thread(b);
-        ball.start();
+        Thread ball = new Thread(b);        
         Thread p2 = new Thread(b.p2);
+        ball.start();
         p2.start();
-
     }
-
     //Paint To JFrame
     @Override
     public void paint(Graphics g){
@@ -67,6 +66,7 @@ public class Main extends JFrame {
     public void draw(Graphics g){
         //Scores, Background, and Paddle
         g.drawImage(bg, 0, 0, this);
+        g.drawImage(bg2, 0, 0, this);
         b.p2.draw(g);
         b.draw(g);
 
@@ -85,7 +85,9 @@ public class Main extends JFrame {
          g2d.drawString("Pong", 181, 50);
 
          //Display Score  
-         Font font1 = new Font("Arial", Font.BOLD, 14);
+
+        Font font1 = new Font("Arial", Font.BOLD, 14);
+
         g2d.setFont(font1);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.drawString(""+b.p1Score, 41, 270);
@@ -101,6 +103,7 @@ public class Main extends JFrame {
         @Override
         public void keyPressed(KeyEvent e){
             b.p2.keyPressed(e);
+            
         }
         @Override
         public void keyReleased(KeyEvent e){
